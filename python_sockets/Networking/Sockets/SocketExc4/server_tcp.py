@@ -5,9 +5,9 @@ import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind(('127.0.0.1', 8008))
 sock.listen()
-print("Server is listening")
+print("Server is listening !")
 (client_socket, client_address) = sock.accept()
-print("Client is listening")
+print("Client is listening !")
 
 while True:
     data = client_socket.recv(1024).decode()
