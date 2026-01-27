@@ -9,5 +9,4 @@
 /dataSources/
 /dataSources.local.xml
 /.idea
-
-.ai/
+*.xml
