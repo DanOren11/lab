@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kunernetes-demo-api   # Name of the Deployment object
+  labels:
+    app: kubernetes-demo-api  # Label used to identify the app
+spec:
+  replicas: 2                # Number of pod replicas to run
+  selector:
+    matchLabels:
+      app: kubernetes-demo-api  # Selector to match pods managed by this deployment
+  template:
+    metadata:
+      labels:
+        app: kubernetes-demo-api  # Labels applied to pods created by this deployment
+    spec:
+      containers:
+        - name: kubernetes-demo-api  # Container name inside the pod
+          image: danpowercom/kubernetes-demo-api  # Docker image to run
+          ports:
+            - containerPort: 3000   # Port the container listens on
+          env:
+            - name: NODE_ENV
+              value: "production"   # Environment variable for app configuration
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath:
+                    metadata.name  # Sets POD_NAME to the current pod's name
+          resources:
+            requests:
+              cpu: "100m"     # Minimum CPU reserved for the container
+              memory: "128Mi" # Minimum memory reserved
+            limits:
+              cpu: "500m"     # Maximum CPU the container can use
+              memory: "512Mi" # Maximum memory allowed
+          readinessProbe:
+            httpGet:
+              path: /readyz     # Endpoint used to check if app is ready to accept traffic
+              port: 3000
+            initialDelaySeconds: 5  # Wait before first readiness check
+            periodSeconds: 10       # Check readiness every 10 seconds
+          livenessProbe:
+            httpGet:
+              path: /healthz    # Endpoint used to check if app is alive
+              port: 3000
+            initialDelaySeconds: 10  # Wait before first liveness check
+            periodSeconds: 20       # Check liveness every 20 seconds
