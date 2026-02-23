@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  
+  ansible-master:
+    build: ./ansible-master
+    container_name: ansible-master-1
+    networks:
+      - ansible-net
+    tty: true
+    stdin_open: true
+
+  ansible-slave1:
+    build: ./ansible-slave
+    container_name: ansible-slave_1
+    networks:
+      - ansible-net
+  ansible-slave2:
+    build: ./ansible-slave
+    container_name: ansible-slave_2
+    networks:
+      - ansible-net
+  ansible-slave3:
+    build: ./ansible-slave
+    container_name: ansible-slave_3
+    networks:
+      - ansible-net
+  ansible-slave4:
+    build: ./ansible-slave
+    container_name: ansible-slave_4
+    networks:
+      - ansible-net
+
+
+networks:
+  ansible-net:
+    driver: bridge
+    
