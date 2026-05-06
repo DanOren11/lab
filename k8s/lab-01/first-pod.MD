@@ -154,3 +154,10 @@ kubectl logs <pod-name>
 kubectl get pod -o wide
 ```
 
+
+
+```
+Edit reolica 
+kubectl scale --replicas=2 rs/example-replicaset
+```
+
