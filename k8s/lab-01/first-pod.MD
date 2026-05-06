@@ -154,19 +154,3 @@ kubectl logs <pod-name>
 kubectl get pod -o wide
 ```
 
-````
-
----
-
-### Why your version broke
-- Missing proper Markdown code fences (``` around sections)
-- No blank lines between sections
-- GitHub treats continuous text as one paragraph
-
----
-
-If you want, I can also turn this into:
-- a **Kubernetes lab workbook**
-- or a **step-by-step student assignment sheet**
-- or a **beautiful GitHub README with badges + diagrams**
-````
