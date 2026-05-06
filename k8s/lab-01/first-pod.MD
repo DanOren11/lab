@@ -1,13 +1,18 @@
-Hands-On - Exercise 01 - my first Pod
-Create namespace with name ns-my-first-pod based on exist cluster​
-Create yaml file my-first-pod.yaml based on image latest of nginx​
-Apply the pod​ to the namespace ns-my-first-pod
-Check that the pod is running correctly under test ns
-Bonus​
-How can we get the IP and Node that the pod running ?​
-How can we get the log of pod ?
-Solution - Exercise 01
-Cleanup if needed
+# Hands-On  - Exercise 01 - my first Pod
+  - Create namespace with name ns-my-first-pod based on exist cluster​
+  - Create yaml file  my-first-pod.yaml based on image latest of nginx​
+  - Apply the pod​ to the namespace ns-my-first-pod
+  - Check that the pod is running correctly under test ns  
+    
+## Bonus​
+  - How can we get the IP and Node that the pod running ?​
+  - How can we get the log of pod  ?
+
+### Solution  - Exercise 01
+
+  - Cleanup if needed
+    
+```
 docker rm -f $(docker ps -a -q)
 docker rmi -f $(docker images -q)
 
@@ -16,8 +21,12 @@ kubectl delete all --all
 kubectl delete pod <pod-name> --grace-period=0 --force
 kubectl get ns
 kubectl delete namespace ns-my-first-pod
-Create ns and Pod
-Go to Practice-01, in case you should create cluster
+```
+
+  - Create ns and Pod
+  - Go to Practice-01, in case you should create cluster
+
+```
 kubectl get pod
 kubectl get ns
 kubectl create ns ns-my-first-pod
@@ -49,3 +58,4 @@ kubectl get svc
 kubectl get rs
 kubectl describe pod example-pod​
 kubectl logs example-pod​
+```
