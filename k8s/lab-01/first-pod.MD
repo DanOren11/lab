@@ -1,25 +1,60 @@
-Hands-On – Exercise 01: My First Pod
-Create namespace with name ns-my-first-pod based on existing cluster
-Create YAML file my-first-pod.yaml based on image nginx:latest
-Apply the pod to the namespace ns-my-first-pod
-Check that the pod is running correctly under the namespace
-Bonus
-How can we get the IP and Node where the pod is running?
-How can we get the logs of the pod?
-Solution – Exercise 01
-Cleanup (if needed)
+That happens because Markdown renders everything as a single paragraph when there are **missing blank lines or improper code block formatting**.
+
+Here is a **GitHub-safe README version** that will NOT collapse into one line when pasted:
+
+---
+
+````md
+# Hands-On Exercise 01 – My First Pod
+
+## Objective
+
+- Create a namespace `ns-my-first-pod`
+- Deploy an NGINX Pod using `nginx:latest`
+- Run the Pod inside the created namespace
+- Verify the Pod is running correctly
+
+---
+
+## Bonus
+
+- How to get the Pod IP and Node?
+- How to view Pod logs?
+
+---
+
+# Solution
+
+## 1. Cleanup (Optional)
+
+Use only if you need a clean environment:
+
+```bash
 docker rm -f $(docker ps -a -q)
 docker rmi -f $(docker images -q)
 
 kubectl get pod
 kubectl delete all --all
 kubectl delete pod <pod-name> --grace-period=0 --force
+
 kubectl get ns
 kubectl delete namespace ns-my-first-pod
-Create Namespace
+````
+
+---
+
+## 2. Create Namespace
+
+### Option A – Command
+
+```bash
 kubectl create ns ns-my-first-pod
 kubectl get ns
-OR via YAML
+```
+
+### Option B – YAML
+
+```bash
 cat << EOF > ns-my-first-pod.yaml
 apiVersion: v1
 kind: Namespace
@@ -28,10 +63,23 @@ metadata:
 EOF
 
 kubectl apply -f ns-my-first-pod.yaml
-Set namespace context (optional but useful)
+kubectl get ns
+```
+
+---
+
+## 3. Set Namespace Context (Optional)
+
+```bash
 kubectl config set-context --current --namespace=ns-my-first-pod
 kubectl config get-contexts
-Create Pod YAML
+```
+
+---
+
+## 4. Create Pod YAML
+
+```bash
 cat << EOF > my-first-pod.yaml
 apiVersion: v1
 kind: Pod
@@ -42,28 +90,83 @@ spec:
   - name: nginx
     image: nginx:latest
 EOF
-Apply Pod
+```
+
+---
+
+## 5. Deploy Pod
+
+```bash
 kubectl apply -f my-first-pod.yaml
-Check Resources
+```
+
+---
+
+## 6. Verify Resources
+
+```bash
 kubectl get pod
 kubectl get ns
 kubectl get svc
 kubectl get rs
-Inspect Pod
+```
+
+---
+
+## 7. Describe Pod
+
+```bash
 kubectl describe pod my-first-pod
-Get Logs
+```
+
+---
+
+## 8. View Logs
+
+```bash
 kubectl logs my-first-pod
-Bonus Answers
-Get Pod IP and Node
+```
+
+---
+
+# Bonus
+
+## Get Pod IP and Node
+
+```bash
 kubectl get pod -o wide
+```
 
-or more detailed:
+or
 
+```bash
 kubectl describe pod my-first-pod
+```
 
-Look for:
+---
 
-IP
-Node
-Get Pod Logs
-kubectl logs my-first-pod
+## Useful Commands
+
+```bash
+kubectl get pods
+kubectl get ns
+kubectl logs <pod-name>
+kubectl get pod -o wide
+```
+
+````
+
+---
+
+### Why your version broke
+- Missing proper Markdown code fences (``` around sections)
+- No blank lines between sections
+- GitHub treats continuous text as one paragraph
+
+---
+
+If you want, I can also turn this into:
+- a **Kubernetes lab workbook**
+- or a **step-by-step student assignment sheet**
+- or a **beautiful GitHub README with badges + diagrams**
+````
