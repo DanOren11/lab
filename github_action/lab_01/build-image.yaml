@@ -28,7 +28,7 @@ jobs:
           context: ./github_action/lab_01 # Path to the Dockerfile and build context
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/repo:latest-100
+            ${{ secrets.DOCKERHUB_USERNAME }}/repo:latest
 
       - name: Logout from Docker Hub
         run: docker logout
