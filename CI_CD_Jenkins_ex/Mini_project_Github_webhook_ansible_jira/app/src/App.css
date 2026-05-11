@@ -1,0 +1,238 @@
+/* ── Reset / Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  background: #0f1117;
+  color: #c9d1d9;
+  min-height: 100svh;
+}
+
+button { cursor: pointer; font: inherit; }
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+}
+
+/* ── Hero ── */
+.hero {
+  text-align: center;
+  padding: 72px 0 56px;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(88, 166, 255, 0.15);
+  color: #58a6ff;
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 700;
+  color: #f0f6fc;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #8b949e;
+  margin-bottom: 32px;
+}
+
+.stack-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.chip {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--chip-color, #c9d1d9);
+  transition: background 0.2s;
+}
+.chip:hover { background: rgba(255,255,255,0.1); }
+
+/* ── Section ── */
+.section {
+  margin-top: 80px;
+}
+
+.section h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #f0f6fc;
+  margin-bottom: 6px;
+}
+
+.section-sub {
+  color: #8b949e;
+  font-size: 15px;
+  margin-bottom: 32px;
+}
+
+/* ── Pipeline Steps ── */
+.steps {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.arrow {
+  color: #30363d;
+  font-size: 22px;
+  padding-top: 18px;
+  flex-shrink: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 16px 20px;
+  min-width: 110px;
+  text-align: center;
+  color: #c9d1d9;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.step:hover {
+  border-color: #58a6ff;
+  background: rgba(88, 166, 255, 0.05);
+}
+
+.step--active {
+  border-color: #58a6ff;
+  background: rgba(88, 166, 255, 0.1);
+}
+
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(88, 166, 255, 0.15);
+  color: #58a6ff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f0f6fc;
+}
+
+.step-desc {
+  font-size: 12px;
+  color: #8b949e;
+  max-width: 120px;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+/* ── Cards ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  border-color: #58a6ff;
+  transform: translateY(-3px);
+}
+
+.card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #f0f6fc;
+}
+
+.card p {
+  font-size: 14px;
+  color: #8b949e;
+  line-height: 1.5;
+}
+
+.port {
+  display: inline-block;
+  margin-top: 8px;
+  background: rgba(88, 166, 255, 0.1);
+  border: 1px solid rgba(88, 166, 255, 0.25);
+  color: #58a6ff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-family: monospace;
+  align-self: flex-start;
+}
+
+/* ── Footer ── */
+.footer {
+  margin-top: 80px;
+  padding-top: 24px;
+  border-top: 1px solid #21262d;
+  text-align: center;
+  font-size: 14px;
+  color: #6e7681;
+}
+
+.footer strong { color: #c9d1d9; }
+
+.diagram-section {
+  padding: 2rem 1rem;
+}
+
+.diagram-wrapper {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.30);
+  overflow: hidden;
+  margin-top: 1rem;
+  border: 1px solid #30363d;
+}
+
+.architecture-diagram {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: none;
+}

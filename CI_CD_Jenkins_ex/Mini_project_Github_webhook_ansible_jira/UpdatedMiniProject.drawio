@@ -1,0 +1,120 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="‫עמוד-1‬" id="PKbUpt28uYcAEtleoGmM">
+    <mxGraphModel dx="1410" dy="662" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-29" edge="1" parent="1" source="9Q_DuM6vkcf8GjmPTIqO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="9Q_DuM6vkcf8GjmPTIqO-28" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="100" y="530" />
+              <mxPoint x="100" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Slave1&lt;div&gt;Infrastructure server&lt;/div&gt;&lt;div&gt;Docker container&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="40" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-4" edge="1" parent="1" source="9Q_DuM6vkcf8GjmPTIqO-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="9Q_DuM6vkcf8GjmPTIqO-3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-2" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="Developer" vertex="1">
+          <mxGeometry height="90" width="90" x="30" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-24" edge="1" parent="1" source="9Q_DuM6vkcf8GjmPTIqO-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="9Q_DuM6vkcf8GjmPTIqO-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-25" edge="1" parent="1" source="9Q_DuM6vkcf8GjmPTIqO-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="9Q_DuM6vkcf8GjmPTIqO-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-3" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="GitHub&lt;div&gt;Private Repo&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;DEV / MAIN&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="120" x="240" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Git push&amp;nbsp;&lt;div&gt;DEV branch&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="110" x="120" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="WEBHOOK&amp;nbsp;&lt;div&gt;CI&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="430" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="WEBHOOK&amp;nbsp;&lt;div&gt;CD&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="60" x="430" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-13" edge="1" parent="1" source="9Q_DuM6vkcf8GjmPTIqO-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="9Q_DuM6vkcf8GjmPTIqO-1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-21" edge="1" parent="1" source="9Q_DuM6vkcf8GjmPTIqO-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="9Q_DuM6vkcf8GjmPTIqO-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-12" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="JENKINS MASTER&lt;div&gt;docker compose&amp;nbsp;&lt;/div&gt;&lt;div&gt;ports&lt;/div&gt;&lt;div&gt;8080 | 50000&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="140" x="300" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-31" edge="1" parent="1" source="9Q_DuM6vkcf8GjmPTIqO-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="9Q_DuM6vkcf8GjmPTIqO-30" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Slave2&lt;div&gt;Application server&lt;/div&gt;&lt;div&gt;Docker container&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="580" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-22" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="port: 50000" vertex="1">
+          <mxGeometry height="30" width="80" x="100" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-23" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="port: 50000" vertex="1">
+          <mxGeometry height="30" width="80" x="560" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-2" edge="1" parent="1" source="9Q_DuM6vkcf8GjmPTIqO-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Ng0qty9W3nhSKpfSncTG-1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;CI pipeline&lt;/b&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;ol&gt;&lt;li&gt;docker build&lt;/li&gt;&lt;li&gt;tag commit&lt;/li&gt;&lt;li&gt;docker push &amp;gt; hub&lt;/li&gt;&lt;li&gt;create PR DEV &amp;gt; MAIN&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="200" x="10" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-6" edge="1" parent="1" source="9Q_DuM6vkcf8GjmPTIqO-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Ng0qty9W3nhSKpfSncTG-5" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="940" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9Q_DuM6vkcf8GjmPTIqO-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;CD pipeline&lt;/b&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;ol&gt;&lt;li&gt;docker pull :SHA&lt;/li&gt;&lt;li&gt;stop old container&lt;/li&gt;&lt;li&gt;run new container: 3000&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="200" x="540" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-3" edge="1" parent="1" source="Ng0qty9W3nhSKpfSncTG-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="9Q_DuM6vkcf8GjmPTIqO-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-1" parent="1" style="shape=singleArrow;whiteSpace=wrap;html=1;arrowWidth=0.4;arrowSize=0.4;rounded=1;" value="trigger" vertex="1">
+          <mxGeometry height="60" width="80" x="350" y="575" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-5" parent="1" style="shape=singleArrow;whiteSpace=wrap;html=1;arrowWidth=0.4;arrowSize=0.4;rounded=1;rotation=-180;" value="" vertex="1">
+          <mxGeometry height="60" width="80" x="400" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-9" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Ng0qty9W3nhSKpfSncTG-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="940" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Trigger" vertex="1">
+          <mxGeometry height="30" width="60" x="400" y="925" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="TRACK PIPELINE&lt;div&gt;&lt;ol&gt;&lt;li&gt;Extract Jira ticket from commit message&lt;/li&gt;&lt;li&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Adding to ticket deploy update comment&lt;/span&gt;&lt;/li&gt;&lt;li&gt;Getting the Done transition ID from Jira&lt;/li&gt;&lt;li&gt;Closing the TIcket (Moving to Done state)&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="270" x="20" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="DIND" vertex="1">
+          <mxGeometry height="30" width="60" x="100" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="DIND" vertex="1">
+          <mxGeometry height="30" width="60" x="560" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-13" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="NETWORK:&lt;br&gt;&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #a5d6ff;&quot;&gt;mini-project-jenkins-net&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="260" x="240" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="GITHUB WEBHOOK TRIGGER THIS" vertex="1">
+          <mxGeometry height="30" width="210" x="100" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="GITHUB WEBHOOK TRIGGER THIS" vertex="1">
+          <mxGeometry height="30" width="210" x="285" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="Ng0qty9W3nhSKpfSncTG-16" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="JENKINS TRIGGER THIS&lt;br&gt;AFTER SUCCESS" vertex="1">
+          <mxGeometry height="30" width="210" x="450" y="880" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

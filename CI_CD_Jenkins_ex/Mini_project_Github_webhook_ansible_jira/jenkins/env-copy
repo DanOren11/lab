@@ -1,0 +1,15 @@
+# APPLICATION_SECRET=2caf21561b4623cf87d92c901a86e8f62d83f6f087845b1a0ef4ebab4439241d
+# APPLICATION_AGENT=Application-Agent
+# #-WorkDir "home/jenkins/Application-slave"
+
+# #INFRASTRUCTURE_SECRET=c122fe97f78b8cc35ca70c7d6a8aabe9c57d605a6339eb7087807f2ea6f18bc8
+# INFRASTRUCTURE_AGENT=Infrastructure_Agent
+# #-WorkDir "home/jenkins/Infrastructure-slave"
+
+# POSTGRES_USER=DanOren
+# POSTGRES_PASSWORD=DanOren123
+# POSTGRES_HOSTNAME=Jira-db
+# POSTGRES_DB=Jira-db
+
+# PGADMIN_EMAIL=danoren545@gmail.com 
+# PGADMIN_PASSWORD=DanOren123

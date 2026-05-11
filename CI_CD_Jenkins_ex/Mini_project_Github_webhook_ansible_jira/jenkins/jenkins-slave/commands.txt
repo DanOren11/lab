@@ -1,0 +1,34 @@
+
+docker build -t jenkins-slave:v2 .
+
+Going to docker hub creating new public repo and tag & push these images
+
+docker tag jenkins-slave:v2 danpowercom/mini-project-jenkins-github-webhook:slave
+
+docker push danpowercom/mini-project-jenkins-github-webhook:slave
+
+
+docker run -d --name jenkins-inbound-agent --network jenkins-net  -e JENKINS_URL=http://jenkins-master1:8080 
+-e JENKINS_SECRET=abc -e JENKINS_AGENT_NAME="jenkins-inbound-agent" -v jenkins-slave-data:/home/jenkins jenkins/inbound-agent
+
+docker network create mini-project-jenkins-net
+
+ docker run -d --name jenkins-master --network mini-project-jenkins-net
+  -p 50001:50000 -p 3001:3000 -p 8081:8080 -v jenkins_master_mini_project:/var/jenkins_home jenkins/jenkins:lts
+
+Runs on: Infrastructure jenkins slave 2
+ 
+
+
+docker run -v /var/run/docker.sock:/var/run/docker.sock
+
+
+home/jenkins/Infrastructure-slave
+
+home/jenkins/Application-slave
+
+https://powercom-team-trdn5d9i.atlassian.net?continue=https%3A%2F%2Fpowercom-team-trdn5d9i.atlassian.net%2Fwelcome%2Fsoftware&atlOrigin=eyJpIjoiYTVmMDgyMjJlMTYwNDEyOGE2NmYyYWY2YTgzY2U2NDAiLCJwIjoiaiJ9
+
+Ngrok must work for triggers the github-webhooks on port 8080!
+------------  < ngrok http 8080 > ------------- 
+
