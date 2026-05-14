@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: web-ingress
+
+spec:
+  ingressClassName: nginx
+
+  rules:
+  - host: localhost
+
+    http:
+      paths:
+      - path: /cats
+        pathType: Prefix
+
+        backend:
+          service:
+            name: cats-service
+            port:
+              number: 80
+  
+      - path: /dogs
+        pathType: Prefix
+
+        backend:
+          service:
+            name: dogs-service
+            port:
+              number: 80
+      - path: /beards
+        pathType: Prefix
+
+        backend:
+          service:
+            name: beards-service
+            port:
+              number: 80
