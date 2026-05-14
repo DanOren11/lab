@@ -1,6 +1,6 @@
 PHP
 
-
+```
 kubectl delete all --all
 kubectl get deployments
 kubectl apply -f autoscaling-hpa.yaml
@@ -73,3 +73,4 @@ kubectl get nodes
 kubectl run -i --tty load-generator --image=busybox /bin/sh while true; do wget -q -O - http://php-apache; done
 
 kubectl run -i --tty load-generator --image=busybox /bin/sh | while true; do wget -q -O - http://php-apache; done
+```
