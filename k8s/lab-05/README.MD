@@ -74,3 +74,157 @@ kubectl run -i --tty load-generator --image=busybox /bin/sh while true; do wget 
 
 kubectl run -i --tty load-generator --image=busybox /bin/sh | while true; do wget -q -O - http://php-apache; done
 ```
+
+
+# Additional Load Testing Examples
+
+## Continuous Load Generator
+
+Run a continuous request loop from BusyBox:
+
+```bash
+kubectl run -i --tty load-generator --image=busybox /bin/sh
+```
+
+Inside the shell:
+
+```sh
+while true; do wget -q -O - http://php-apache; done
+```
+
+---
+
+## Single Command Load Generator
+
+```bash
+kubectl run -i --tty load-generator --image=busybox /bin/sh -c "while true; do wget -q -O - http://php-apache; done"
+```
+
+---
+
+# Monitor Cluster Scaling
+
+## Watch HPA Metrics
+
+```bash
+kubectl get hpa --watch
+```
+
+---
+
+## Watch Pods Scaling
+
+```bash
+kubectl get pods -w
+```
+
+---
+
+## Watch Deployments
+
+```bash
+kubectl get deployments -w
+```
+
+---
+
+## Watch Nodes
+
+```bash
+kubectl get nodes -w
+```
+
+---
+
+# Debugging Commands
+
+## Describe HPA
+
+```bash
+kubectl describe hpa php-apache
+```
+
+---
+
+## Describe Deployment
+
+```bash
+kubectl describe deployment php-apache
+```
+
+---
+
+## Describe Pods
+
+```bash
+kubectl describe pods
+```
+
+---
+
+## View Logs
+
+```bash
+kubectl logs deployment/php-apache
+```
+
+---
+
+# Cleanup Load Generator
+
+Delete load generator pod:
+
+```bash
+kubectl delete pod load-generator
+```
+
+---
+
+# Full Cleanup
+
+Delete all resources:
+
+```bash
+kubectl delete all --all
+```
+
+Verify cleanup:
+
+```bash
+kubectl get all
+```
+
+---
+
+# Useful Troubleshooting Commands
+
+## Check Metrics Server
+
+```bash
+kubectl get apiservices | grep metrics
+```
+
+---
+
+## Verify Metrics API
+
+```bash
+kubectl top pods
+kubectl top nodes
+```
+
+---
+
+## Restart Deployment
+
+```bash
+kubectl rollout restart deployment php-apache
+```
+
+---
+
+## Check Rollout Status
+
+```bash
+kubectl rollout status deployment php-apache
+```
