@@ -1,131 +1,161 @@
 # Kubernetes HPA Autoscaling Demo
 
-## Clean Existing Resources
+## Cleanup Existing Resources
 
 ```bash
 kubectl delete all --all
-Verify Cluster State
+```
+
+## Verify Cluster State
+
+```bash
 kubectl get deployments
 kubectl get pods
 kubectl get svc
 kubectl get nodes
-Deploy Application
+```
+
+## Deploy Application
+
+```bash
 kubectl apply -f autoscaling-hpa.yaml
+```
 
-Verify deployment:
+## Verify Deployment
 
+```bash
 kubectl get deployments
 kubectl get pods
 kubectl get svc
-Create Horizontal Pod Autoscaler (HPA)
-Initial HPA Configuration
+```
+
+# Create Horizontal Pod Autoscaler (HPA)
+
+```bash
 kubectl autoscale deployment php-apache --cpu-percent=10 --min=1 --max=2
+```
 
-Check HPA:
+## Check HPA
 
+```bash
 kubectl get hpa
+```
 
-Watch HPA changes live:
-
-kubectl get hpa --watch
-Generate Load to Trigger Scaling
-Open a New Terminal
-Option 1 — Interactive BusyBox Shell
-kubectl run -i --tty load-generator --image=busybox /bin/sh
-
-Inside the container run:
-
-while sleep 0.01; do wget -q -O- http://php-apache; done
-Option 2 — One-Liner Load Generator
-kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- \
-/bin/sh -c "while true; do wget -q -O - http://php-apache; done"
-Monitor Autoscaling
-
-Back in the previous terminal:
-
-kubectl get hpa --watch
-
-Check running pods:
-
-kubectl get pods
-Edit HPA Configuration
-
-Edit the HPA resource:
-
-kubectl edit hpa php-apache
-
-Update:
-
-maxReplicas → 50
-minReplicas → 3
-
-Watch scaling behavior again:
-
-kubectl get hpa --watch
-
-Check running pods:
-
-kubectl get pods
-
-Check cluster nodes:
-
-kubectl get nodes
-Recreate HPA with New Limits
-
-Delete the current HPA:
-
-kubectl delete hpa php-apache
-
-Verify deletion:
-
-kubectl get hpa
-
-Create a new HPA:
-
-kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=5
-
-Verify:
-
-kubectl get hpa
-Reapply HPA Manifest
-kubectl apply -f autoscaling-hpa.yaml
-
-Verify resources:
-
-kubectl get deployments
-kubectl get pods
-kubectl get svc
-kubectl get nodes
-Cleanup
-
-Delete all resources:
-
-kubectl delete all --all
-
-Verify cleanup:
-
-kubectl get pod
-kubectl get svc
-Useful Commands Reference
-Watch HPA
-kubectl get hpa --watch
-Check Pods
-kubectl get pods
-Check Nodes
-kubectl get nodes
-View Deployments
-kubectl get deployments
----
-
-# Monitor Cluster Scaling
-
-## Watch HPA Metrics
+## Watch HPA Changes
 
 ```bash
 kubectl get hpa --watch
 ```
 
+# Generate Load to Trigger Scaling
+
+## Open a New Terminal
+
+### Start BusyBox Shell
+
+```bash
+kubectl run -i --tty load-generator --image=busybox /bin/sh
+```
+
+### Run Continuous Load
+
+```sh
+while sleep 0.01; do wget -q -O- http://php-apache; done
+```
+
 ---
+
+## Alternative One-Liner Load Generator
+
+```bash
+kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c "while true; do wget -q -O - http://php-apache; done"
+```
+
+# Back to Previous Terminal
+
+## Watch HPA Scaling
+
+```bash
+kubectl get hpa --watch
+```
+
+## Check Running Pods
+
+```bash
+kubectl get pods
+```
+
+# Edit HPA Configuration
+
+```bash
+kubectl edit hpa php-apache
+```
+
+Update:
+
+- `maxReplicas: 50`
+- `minReplicas: 3`
+
+## Watch HPA Again
+
+```bash
+kubectl get hpa --watch
+```
+
+## Check Pods
+
+```bash
+kubectl get pods
+```
+
+## Check Cluster Nodes
+
+```bash
+kubectl get nodes
+```
+
+# Recreate HPA with Different Limits
+
+## Delete Existing HPA
+
+```bash
+kubectl delete hpa php-apache
+```
+
+## Verify HPA Deletion
+
+```bash
+kubectl get hpa
+```
+
+## Create New HPA
+
+```bash
+kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=5
+```
+
+## Verify New HPA
+
+```bash
+kubectl get hpa
+```
+
+# Reapply HPA Manifest
+
+```bash
+kubectl apply -f autoscaling-hpa.yaml
+```
+
+# Monitor Resources
+
+```bash
+kubectl get deployments
+kubectl get pods
+kubectl get svc
+kubectl get nodes
+```
+
+# Additional Monitoring Commands
 
 ## Watch Pods Scaling
 
@@ -133,15 +163,11 @@ kubectl get hpa --watch
 kubectl get pods -w
 ```
 
----
-
 ## Watch Deployments
 
 ```bash
 kubectl get deployments -w
 ```
-
----
 
 ## Watch Nodes
 
@@ -149,9 +175,7 @@ kubectl get deployments -w
 kubectl get nodes -w
 ```
 
----
-
-# Debugging Commands
+# Troubleshooting Commands
 
 ## Describe HPA
 
@@ -159,15 +183,11 @@ kubectl get nodes -w
 kubectl describe hpa php-apache
 ```
 
----
-
 ## Describe Deployment
 
 ```bash
 kubectl describe deployment php-apache
 ```
-
----
 
 ## Describe Pods
 
@@ -175,51 +195,17 @@ kubectl describe deployment php-apache
 kubectl describe pods
 ```
 
----
-
 ## View Logs
 
 ```bash
 kubectl logs deployment/php-apache
 ```
 
----
-
-# Cleanup Load Generator
-
-Delete load generator pod:
-
-```bash
-kubectl delete pod load-generator
-```
-
----
-
-# Full Cleanup
-
-Delete all resources:
-
-```bash
-kubectl delete all --all
-```
-
-Verify cleanup:
-
-```bash
-kubectl get all
-```
-
----
-
-# Useful Troubleshooting Commands
-
 ## Check Metrics Server
 
 ```bash
 kubectl get apiservices | grep metrics
 ```
-
----
 
 ## Verify Metrics API
 
@@ -228,18 +214,34 @@ kubectl top pods
 kubectl top nodes
 ```
 
----
-
 ## Restart Deployment
 
 ```bash
 kubectl rollout restart deployment php-apache
 ```
 
----
-
 ## Check Rollout Status
 
 ```bash
-kubectl rollout status deployment php-apache
+kubectl rollout status deployment/php-apache
+```
+
+# Cleanup
+
+## Delete Load Generator
+
+```bash
+kubectl delete pod load-generator
+```
+
+## Delete All Resources
+
+```bash
+kubectl delete all --all
+```
+
+## Verify Cleanup
+
+```bash
+kubectl get all
 ```
