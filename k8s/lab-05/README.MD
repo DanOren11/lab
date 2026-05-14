@@ -1,105 +1,120 @@
-HPA
+# Kubernetes HPA Autoscaling Demo
 
-```
+## Clean Existing Resources
+
+```bash
 kubectl delete all --all
-kubectl get deployments
-kubectl apply -f autoscaling-hpa.yaml
+Verify Cluster State
 kubectl get deployments
 kubectl get pods
 kubectl get svc
+kubectl get nodes
+Deploy Application
+kubectl apply -f autoscaling-hpa.yaml
 
+Verify deployment:
+
+kubectl get deployments
+kubectl get pods
+kubectl get svc
+Create Horizontal Pod Autoscaler (HPA)
+Initial HPA Configuration
 kubectl autoscale deployment php-apache --cpu-percent=10 --min=1 --max=2
-kubectl get hpa
-kubectl get hpa --watch
-new terminal
-#kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never --
-while sleep 0.01; do wget -q -O- http://php-apache; done
 
+Check HPA:
+
+kubectl get hpa
+
+Watch HPA changes live:
+
+kubectl get hpa --watch
+Generate Load to Trigger Scaling
+Open a New Terminal
+Option 1 — Interactive BusyBox Shell
 kubectl run -i --tty load-generator --image=busybox /bin/sh
 
-back to priviouse
+Inside the container run:
+
+while sleep 0.01; do wget -q -O- http://php-apache; done
+Option 2 — One-Liner Load Generator
+kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- \
+/bin/sh -c "while true; do wget -q -O - http://php-apache; done"
+Monitor Autoscaling
+
+Back in the previous terminal:
+
+kubectl get hpa --watch
+
+Check running pods:
+
+kubectl get pods
+Edit HPA Configuration
+
+Edit the HPA resource:
 
 kubectl edit hpa php-apache
 
-kubectl get hpa
-kubectl get hpa
-kubectl apply -f autoscaling-hpa.yaml
+Update:
+
+maxReplicas → 50
+minReplicas → 3
+
+Watch scaling behavior again:
+
+kubectl get hpa --watch
+
+Check running pods:
+
+kubectl get pods
+
+Check cluster nodes:
+
 kubectl get nodes
-kubectl get deployments
+Recreate HPA with New Limits
 
-Generate load to trigger scaling
+Delete the current HPA:
 
-In a new terminal run the following command to drop into a shell on a new container
+kubectl delete hpa php-apache
+
+Verify deletion:
+
+kubectl get hpa
+
+Create a new HPA:
 
 kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=5
-  577  kubectl get hpa
-  578  kubectl delete hpa php-apache
-  579  kubectl get hpa
-  580  kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=5
-  581  kubectl get hpa
-  582  kubectl delete all --all
-  583  kubectl get pod
-  584  kubectl get svc
-  585  history
-  
-  
-  n the previous terminal watch the changes of HPA with the following command
 
-kubectl get hpa --watch
+Verify:
 
-You can check the running pods as well
+kubectl get hpa
+Reapply HPA Manifest
+kubectl apply -f autoscaling-hpa.yaml
 
+Verify resources:
+
+kubectl get deployments
 kubectl get pods
-Edit HPA configuration
-
-Edit the HPA resource to increment the maxReplicas up to 50 and the minReplicas to 3
-
-kubectl edit hpa php-apache
-
-Watch the HPA with the following command to see how the application is beeing scaled
-
-kubectl get hpa --watch
-
-You can check the running pods as well
-
-kubectl get pods
-Check current cluster nodes
-
-Check the current nodes of your cluster and see that the nodes have been added
-
+kubectl get svc
 kubectl get nodes
+Cleanup
 
+Delete all resources:
 
-kubectl run -i --tty load-generator --image=busybox /bin/sh while true; do wget -q -O - http://php-apache; done
+kubectl delete all --all
 
-kubectl run -i --tty load-generator --image=busybox /bin/sh | while true; do wget -q -O - http://php-apache; done
-```
+Verify cleanup:
 
-
-# Additional Load Testing Examples
-
-## Continuous Load Generator
-
-Run a continuous request loop from BusyBox:
-
-```bash
-kubectl run -i --tty load-generator --image=busybox /bin/sh
-```
-
-Inside the shell:
-
-```sh
-while true; do wget -q -O - http://php-apache; done
-```
-
----
-
-## Single Command Load Generator
-
-```bash
-kubectl run -i --tty load-generator --image=busybox /bin/sh -c "while true; do wget -q -O - http://php-apache; done"
-```
-
+kubectl get pod
+kubectl get svc
+Useful Commands Reference
+Watch HPA
+kubectl get hpa --watch
+Check Pods
+kubectl get pods
+Check Nodes
+kubectl get nodes
+View Deployments
+kubectl get deployments
 ---
 
 # Monitor Cluster Scaling
