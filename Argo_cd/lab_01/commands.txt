@@ -5,3 +5,23 @@ helm create my-app
 helm template my-app .
 
 helm install my-app .
+kubectl port-forward svc/my-app 3000:3000
+
+kubectl create namespace argocd
+
+kubectl apply --server-side -n argocd  -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+-- wait until all running
+kubectl get pods -n argocd -w
+
+kubectl port-forward svc/argocd-server -n argocd 8087:443
+
+username always admin   
+
+to get pass
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}"
+
+now decode it 
+[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("WHAT WE NEED TO ENCODE JUST PASS IT HERE"))
+
+Then you will have the username and passwords

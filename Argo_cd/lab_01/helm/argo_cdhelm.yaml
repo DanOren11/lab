@@ -8,9 +8,9 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/DanOren11/lab.git/Argo_cd/lab_01/helm
+    repoURL: https://github.com/DanOren11/lab.git
     targetRevision: HEAD
-    path: helm/my-app
+    path: Argo_cd/lab_01/helm/my-app
 
     helm:
       valueFiles:
@@ -18,7 +18,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: production
+    namespace: argocd
 
   syncPolicy:
     automated:
