@@ -8,7 +8,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/company/my-app.git
+    repoURL: https://github.com/DanOren11/lab.git/Argo_cd/lab_01/helm
     targetRevision: HEAD
     path: helm/my-app
 
