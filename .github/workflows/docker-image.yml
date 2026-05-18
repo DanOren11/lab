@@ -28,7 +28,7 @@ jobs:
           context: ./Argo_cd/lab_01 # Path to the Dockerfile and build context
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/repo:v1.0.0
+            ${{ secrets.DOCKERHUB_USERNAME }}/repo:v1.0.1
 
       - name: Logout from Docker Hub
         run: docker logout
