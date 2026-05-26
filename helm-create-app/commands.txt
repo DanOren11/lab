@@ -1,2 +1,27 @@
-docker build -t your-dockerhub-user/my-application:1.0 .
-docker push your-dockerhub-user/my-application:1.0
+docker build -t danpowercom/helm-python-app:1.0
+
+docker push danpowercom/helm-python-app:1.0
+
+helm create my-application
+
+rm -rf templates/tests
+change 
+1. values.yaml
+2. templates/deployment.yaml
+3. templates/service.yaml
+
+
+helm install my-app ./my-application
+
+verify
+kubectl get pods
+kubectl get svc
+
+port forward 
+kubectl port-forward svc/my-app-my-application 5000:5000
+
+test 
+curl localhost:5000
+
+for edits updates
+helm upgrade flask-app ./my-application
