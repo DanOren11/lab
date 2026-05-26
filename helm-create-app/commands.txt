@@ -1,0 +1,2 @@
+docker build -t your-dockerhub-user/my-application:1.0 .
+docker push your-dockerhub-user/my-application:1.0
