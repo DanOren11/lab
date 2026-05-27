@@ -9,18 +9,18 @@ spec:
 
   selector:
     matchLabels:
-      app: flask-app
+      app: {{ .Release.Name }}
 
   template:
     metadata:
       labels:
-        app: flask-app
+        app: {{ .Release.Name }}
 
     spec:
       containers:
-        - name: flask-app
+        - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
 
           ports:
-            - containerPort: 5000
+            - containerPort: {{ .Values.containerPort }}

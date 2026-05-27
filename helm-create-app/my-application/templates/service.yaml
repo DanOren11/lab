@@ -6,11 +6,11 @@ metadata:
 
 spec:
   selector:
-    app: flask-app
+    app: {{ .Release.Name }}
 
   ports:
     - protocol: TCP
-      port: 5000
-      targetPort: 5000
+      port: {{ .Values.service.port }}
+      targetPort: {{.Values.containerPort}}
 
   type: ClusterIP
