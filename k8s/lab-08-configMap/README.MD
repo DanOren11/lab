@@ -1,120 +1,398 @@
+# Kubernetes ConfigMap
 
-K8s ConfigMap
-Configmap It’s just a way to manage configuration independent of the container image using a ConfigMap any cluster environment (dev, staging, prod)
+A **ConfigMap** is a Kubernetes object used to manage configuration separately from the container image.
 
-ConfigMaps are environment-agnostic.
+This allows the same container image to run in different environments such as:
 
-You can create different ConfigMaps for different environments:
+* Development (`dev`)
+* Staging (`staging`)
+* Production (`prod`)
 
+ConfigMaps are **environment-agnostic**.
+
+Example ConfigMaps:
+
+```bash
 app-config-dev
 app-config-prod
-Then use the appropriate one in each Pod depending on the environment
+```
 
-You can inject different versions of a file (like index.html) using a single ConfigMap but not dynamically at runtime per environment Instead, you update the existing ConfigMap with the new content and re-apply the Pod or Deployment
+You can then attach the appropriate ConfigMap to a Pod or Deployment depending on the environment.
 
-The kube-root-ca.crt in ConfigMap is Allow Pods to securely communicate with the Kubernetes API server using TLS its automatically created in each namespace by the Kubernetes control plane It contains the cluster's root Certificate Authority (CA) certificate and it's used by workloads (Pods) inside the cluster to securely communicate with the Kubernetes API server over HTTPS
+---
 
-the Purpose is TLS validation: Applications inside Pods can verify the identity of the API server. Secure service account token usage: Used in conjunction with the
-Mount the CA cert at /var/run/secrets/kubernetes.io/serviceaccount/ca.crt inside Pods.
-Configmap Lab-01 - step by step index.html
-Inject different versions of a index.html file using a single ConfigMap but not dynamically at runtime per environment
+# Why Use ConfigMaps?
 
-Instead, you update the existing ConfigMap with the new content and re-apply the Pod
+ConfigMaps help you:
 
-Create index.html file
+* Separate configuration from application code
+* Reuse the same container image across environments
+* Store configuration files
+* Store environment variables
+* Mount configuration into Pods
 
+---
+
+# Important Note About Dynamic Updates
+
+You can inject different versions of a file (for example `index.html`) using a ConfigMap.
+
+However, switching environments is **not dynamic at runtime**.
+
+Instead:
+
+1. Update the existing ConfigMap
+2. Re-apply or restart the Pod/Deployment
+
+---
+
+# `kube-root-ca.crt` ConfigMap
+
+Kubernetes automatically creates a ConfigMap named:
+
+```bash
+kube-root-ca.crt
+```
+
+inside every namespace.
+
+## Purpose
+
+It contains the cluster Root Certificate Authority (CA) certificate.
+
+This allows Pods to securely communicate with the Kubernetes API Server over HTTPS using TLS.
+
+### Used For
+
+* TLS validation
+* Verifying the identity of the API server
+* Secure service account communication
+
+### Mounted Inside Pods
+
+```bash
+/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+```
+
+---
+
+# ConfigMap Lab-01 — `index.html`
+
+## Goal
+
+Inject different versions of an `index.html` file using a ConfigMap.
+
+---
+
+## Step 1 — Create `index.html`
+
+```html
 <!DOCTYPE html>
 <html>
-<head><title>Env</title></head>
-<body><h1>Hello from ConfigMap Dev!</h1></body>
+<head>
+  <title>Env</title>
+</head>
+<body>
+  <h1>Hello from ConfigMap Dev!</h1>
+</body>
 </html>
-Create the ConfigMap
+```
+
+---
+
+## Step 2 — Create the ConfigMap
+
+### View existing ConfigMaps
+
+```bash
 kubectl get configmap
 kubectl describe configmap
+```
+
+### Create ConfigMap from file
+
+```bash
 kubectl create configmap html-config --from-file=index.html
+```
+
+### Verify
+
+```bash
 kubectl get configmap
 kubectl describe configmap
 kubectl get configmap -o yaml
-  # See the data diif with and without index.html data
-kubectl describe configmap kube-root-ca.crt
-kubectl describe configmap kube-root-ca.crt
+```
 
-Mount the ConfigMap in a Pod, see the example pod-with-configmap.yaml
+> Compare the YAML output before and after adding `index.html`.
+
+---
+
+## Step 3 — Inspect `kube-root-ca.crt`
+
+```bash
+kubectl describe configmap kube-root-ca.crt
+```
+
+---
+
+## Step 4 — Mount the ConfigMap into a Pod
+
+Create `pod-with-configmap.yaml`
+
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
   name: html-pod
+
 spec:
   containers:
-  - name: nginx
-    image: nginx
-    volumeMounts:
-    - name: html-volume
-      mountPath: /usr/share/nginx/html/index.html
-      subPath: index.html
+    - name: nginx
+      image: nginx
+
+      volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html/index.html
+          subPath: index.html
+
   volumes:
-  - name: html-volume
-    configMap:
-      name: html-config
-Aplly the pod
+    - name: html-volume
+      configMap:
+        name: html-config
+```
+
+---
+
+## Step 5 — Deploy the Pod
+
+```bash
 kubectl apply -f pod-with-configmap.yaml
-Port forward to the Browser
+```
+
+---
+
+## Step 6 — Port Forward
+
+```bash
 kubectl port-forward pod/html-pod 8080:80
-Go to the Browser
+```
 
+Open in browser:
+
+```text
 http://localhost:8080/
-Update the ConfigMap with a new version (Prod)
+```
 
+---
+
+# Update the ConfigMap (Prod Version)
+
+## New `index.html`
+
+```html
 <!DOCTYPE html>
 <html>
-<head><title>Env</title></head>
-<body><h1>Hello from ConfigMap Prod!</h1></body>
+<head>
+  <title>Env</title>
+</head>
+<body>
+  <h1>Hello from ConfigMap Prod!</h1>
+</body>
 </html>
-Update the ConfigMap
-kubectl create configmap html-config --from-file=index.html --dry-run=client -o yaml | kubectl apply -f -
-Delete and recreate the Pod
+```
+
+---
+
+## Update the Existing ConfigMap
+
+```bash
+kubectl create configmap html-config \
+  --from-file=index.html \
+  --dry-run=client -o yaml | kubectl apply -f -
+```
+
+---
+
+## Restart the Pod
+
+```bash
 kubectl delete pod html-pod
 kubectl apply -f pod-with-configmap.yaml
-Port forward to the Browser
+```
+
+---
+
+## Port Forward Again
+
+```bash
 kubectl port-forward pod/html-pod 8080:80
-Go to the Browser
+```
+
+Open:
+
+```text
 http://localhost:8080/
-ConfigMap Lab-02 with app.properties
-Create the /config/app.properties file ( see the file in config folder )
+```
+
+You should now see:
+
+```text
+Hello from ConfigMap Prod!
+```
+
+---
+
+# ConfigMap Lab-02 — `app.properties`
+
+## Step 1 — Create `config/app.properties`
+
+```properties
 # app.properties
+
 app.name=MyKubeApp
 app.environment=development
-Create a ConfigMap from the file
+```
+
+---
+
+## Step 2 — Create ConfigMap from File
+
+```bash
 kubectl create configmap app-config --from-file=config/app.properties
+```
+
+Verify:
+
+```bash
 kubectl describe configmap app-config
-Use the ConfigMap in a config-pod-properties.yaml (mount as file)
+```
+
+---
+
+## Step 3 — Mount ConfigMap into a Pod
+
+Create `configmap-pod-properties.yaml`
+
+```yaml
 apiVersion: v1
 kind: Pod
+
 metadata:
   name: app-with-config
+
 spec:
   containers:
-  - name: myapp
-    image: busybox
-    command: [ "sh", "-c", "cat /config/app.properties && sleep 3600" ]
-    volumeMounts:
-    - name: config-volume
-      mountPath: /config
+    - name: myapp
+      image: busybox
+
+      command:
+        - "sh"
+        - "-c"
+        - "cat /config/app.properties && sleep 3600"
+
+      volumeMounts:
+        - name: config-volume
+          mountPath: /config
+
   volumes:
-  - name: config-volume
-    configMap:
-      name: app-config
-Deploy the Pod
+    - name: config-volume
+      configMap:
+        name: app-config
+```
+
+---
+
+## Step 4 — Deploy the Pod
+
+```bash
 kubectl apply -f configmap-pod-properties.yaml
-Check if the file is mounted
-kubectl exec app-with-config -- cat config/app.properties
-Usage commands
+```
+
+---
+
+## Step 5 — Verify Mounted File
+
+```bash
+kubectl exec app-with-config -- cat /config/app.properties
+```
+
+---
+
+# Useful Commands
+
+## View ConfigMaps
+
+```bash
 kubectl get configmap
+```
+
+---
+
+## Create ConfigMap
+
+```bash
 kubectl create configmap app-config --from-file=app.properties
+```
+
+---
+
+## Describe ConfigMap
+
+```bash
 kubectl describe configmap app-config
+```
+
+---
+
+## Apply YAML
+
+```bash
 kubectl apply -f configmap-pod-properties.yaml
-kubectl exec app-with-config -- cat config/app.properties
+```
+
+---
+
+## Read Mounted File
+
+```bash
+kubectl exec app-with-config -- cat /config/app.properties
+```
+
+---
+
+## Delete All ConfigMaps
+
+```bash
 kubectl delete configmap --all
-ConfigMap Lab-03 all together app.properties, index.html and switch between env
-Node - do it twise to makesure is edited
+```
+
+---
+
+# ConfigMap Lab-03 — Switch Between Environments
+
+This lab combines:
+
+* `app.properties`
+* `index.html`
+* Environment switching
+
+## Edit the ConfigMap
+
+```bash
 kubectl edit configmap app-config
+```
+
+> Edit the values multiple times to verify changes are applied correctly.
+
+---
+
+# Summary
+
+ConfigMaps allow Kubernetes applications to:
+
+* Separate configuration from code
+* Reuse the same container image in multiple environments
+* Inject files and environment variables into Pods
+* Update configuration without rebuilding images
+
+They are one of the most important Kubernetes resources for managing application configuration cleanly and securely.
