@@ -331,7 +331,7 @@ kubectl get configmap
 ## Create ConfigMap
 
 ```bash
-kubectl create configmap app-config --from-file=app.properties
+kubectl create configmap app-config --from-file=config/app.properties
 ```
 
 ---
